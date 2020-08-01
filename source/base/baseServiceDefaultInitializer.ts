@@ -1,4 +1,4 @@
-import DefaultInitializer from '../default/defaultInitializer';
+import { DefaultInitializer } from 'default-initializer';
 import { Handler } from 'flexiblepersistence';
 
 export default interface BaseServiceDefaultInitializer

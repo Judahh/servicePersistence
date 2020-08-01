@@ -1,5 +1,5 @@
 import ServiceModel from '../model/serviceModel';
-import ServiceSelectAllAdapter from '../adapter/service/serviceSelectAllAdapter';
+import ServiceSelectAllAdapter from '../adapter/serviceSelectAllAdapter';
 import BaseServiceDefault from './baseServiceDefault';
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore

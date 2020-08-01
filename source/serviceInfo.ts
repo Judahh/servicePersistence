@@ -1,7 +1,7 @@
 import { Journaly } from 'journaly';
 import { ConnectionOptions } from 'mongoose';
 import * as tls from 'tls';
-import { DatabaseInfo } from '../database/databaseInfo';
+import { DatabaseInfo } from 'flexiblepersistence';
 export class ServiceInfo extends DatabaseInfo {
   public journaly: Journaly<any>;
 

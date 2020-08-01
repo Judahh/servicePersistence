@@ -1,4 +1,4 @@
-import ServiceDeleteAdapter from '../adapter/service/serviceDeleteAdapter';
+import ServiceDeleteAdapter from '../adapter/serviceDeleteAdapter';
 import BaseServiceDefault from './baseServiceDefault';
 import { Event, Operation } from 'flexiblepersistence';
 /* eslint-disable @typescript-eslint/ban-ts-ignore */

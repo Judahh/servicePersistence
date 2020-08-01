@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
-import ServiceRestrictedAdapter from '../adapter/controller/controllerRestrictedAdapter';
+import ServiceRestrictedAdapter from '../controller/controllerRestrictedAdapter';
 import BaseServiceSelectById from './baseServiceSelectById';
 import BaseServiceSelectAll from './baseServiceSelectAll';
 import { Mixin } from 'ts-mixer';

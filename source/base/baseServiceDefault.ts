@@ -1,6 +1,6 @@
 import { settings } from 'ts-mixer';
 import { Handler } from 'flexiblepersistence';
-import Default from '../default/default';
+import { Default } from 'default-initializer';
 import BaseServiceDefaultInitializer from './baseServiceDefaultInitializer';
 settings.initFunction = 'init';
 /* eslint-disable @typescript-eslint/ban-ts-ignore */

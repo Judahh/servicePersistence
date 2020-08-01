@@ -9,7 +9,7 @@ import {
   PersistenceInputUpdate,
   PersistenceInputRead,
   PersistenceInputDelete,
-} from '../index';
+} from 'flexiblepersistence';
 import { Pool } from 'pg';
 import { ServiceInfo } from './serviceInfo';
 export class ServiceHandler implements PersistenceAdapter {

@@ -1,4 +1,4 @@
-import ServiceStoreAdapter from '../adapter/service/serviceStoreAdapter';
+import ServiceStoreAdapter from '../adapter/serviceStoreAdapter';
 import BaseServiceDefault from './baseServiceDefault';
 import ServiceSimpleModel from '../model/serviceSimpleModel';
 import ServiceModel from '../model/serviceModel';

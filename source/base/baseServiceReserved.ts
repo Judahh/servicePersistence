@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { Mixin } from 'ts-mixer';
-import ServiceReservedAdapter from '../adapter/controller/controllerReservedAdapter';
+import ServiceReservedAdapter from '../controller/controllerReservedAdapter';
 import BaseServiceStore from './baseServiceStore';
 import BaseServiceDelete from './baseServiceDelete';
 import BaseServiceUpdate from './baseServiceUpdate';
