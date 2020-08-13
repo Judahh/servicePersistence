@@ -30,7 +30,7 @@ test('add and read array and find object', async (done) => {
   console.log(journaly.getSubjects());
   const handler = new Handler(write, read);
   await handler.getWrite().clear('events');
-  const obj = new Object();
+  const obj = {};
   obj['test'] = 'test';
   try {
     const persistencePromise = await handler.addEvent(
