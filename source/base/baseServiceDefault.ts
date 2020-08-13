@@ -1,30 +1,26 @@
 import { settings } from 'ts-mixer';
-import { Handler } from 'flexiblepersistence';
-import { Default } from 'default-initializer';
-import BaseServiceDefaultInitializer from './baseServiceDefaultInitializer';
+import { Default, DefaultInitializer } from 'default-initializer';
 settings.initFunction = 'init';
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 export default class BaseServiceDefault extends Default {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
-  protected handler: Handler;
   protected baseClass = 'BaseService';
 
   protected nameDAO: string | undefined;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected async dAO(method: string, ...args: any): Promise<any[]> {
-    if (!this.nameDAO) this.nameDAO = this.element.replace('Service', 'DAO');
-    return this.journaly.publish(this.nameDAO + '.' + method, ...args);
+  protected async dAO(
+    method: string,
+    ...args: any
+  ): Promise<any[] | undefined> {
+    if (!this.nameDAO && this.element)
+      this.nameDAO = this.element.replace('Service', 'DAO');
+    return this.journaly?.publish(this.nameDAO + '.' + method, ...args);
   }
 
-  protected constructor(initDefault: BaseServiceDefaultInitializer) {
+  public constructor(initDefault: DefaultInitializer) {
     super(initDefault);
-    this.handler = initDefault.handler;
   }
 
-  protected init(initDefault: BaseServiceDefaultInitializer): void {
+  public init(initDefault: DefaultInitializer): void {
     super.init(initDefault);
-    this.handler = initDefault.handler;
   }
 }
