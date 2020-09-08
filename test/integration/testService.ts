@@ -17,16 +17,16 @@ settings.initFunction = 'init';
 export default class TestService
   extends BaseServiceDefault
   implements PersistenceAdapter {
-    constructor(initDefault: DefaultInitializer){
-      super(initDefault);
-      initDefault
-    }
+  constructor(initDefault: DefaultInitializer) {
+    super(initDefault);
+    initDefault;
+  }
 
   close(): Promise<unknown> {
     throw new Error('Method not implemented.');
   }
   getDatabaseInfo() {
-    this.
+    throw new Error('Method not implemented.');
   }
   existent(input: PersistenceInputCreate): Promise<PersistencePromise> {
     return new Promise<PersistencePromise>((resolve) => {
