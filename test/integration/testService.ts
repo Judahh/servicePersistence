@@ -13,13 +13,26 @@ import {
 } from 'flexiblepersistence';
 import { settings } from 'ts-mixer';
 settings.initFunction = 'init';
-export default class TestService extends BaseServiceDefault
+export default class TestService
+  extends BaseServiceDefault
   implements PersistenceAdapter {
   close(): Promise<unknown> {
     throw new Error('Method not implemented.');
   }
   getDatabaseInfo() {
     throw new Error('Method not implemented.');
+  }
+  existent(input: PersistenceInputCreate): Promise<PersistencePromise> {
+    return new Promise<PersistencePromise>((resolve) => {
+      resolve(
+        new PersistencePromise({
+          receivedItem: 'existent.receivedItem',
+          result: 'existent.result',
+          selectedItem: 'existent.selectedItem',
+          sentItem: 'existent.sentItem',
+        })
+      );
+    });
   }
   create(input: PersistenceInputCreate): Promise<PersistencePromise> {
     return new Promise<PersistencePromise>((resolve) => {

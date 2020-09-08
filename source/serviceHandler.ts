@@ -47,6 +47,17 @@ export class ServiceHandler implements PersistenceAdapter {
     )[0];
   }
 
+  public async existent(
+    input: PersistenceInputCreate
+  ): Promise<PersistencePromise> {
+    return (
+      await this.databaseInfo.journaly.publish(
+        this.getFormattedScheme(input.scheme) + 'Service.existent',
+        input
+      )
+    )[0];
+  }
+
   public async create(
     input: PersistenceInputCreate
   ): Promise<PersistencePromise> {

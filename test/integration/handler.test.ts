@@ -27,7 +27,7 @@ test('add and read array and find object', async (done) => {
       port: process.env.MONGO_PORT,
     })
   );
-  console.log(journaly.getSubjects());
+  // console.log(journaly.getSubjects());
   const handler = new Handler(write, read);
   await handler.getWrite().clear('events');
   const obj = {};
