@@ -28,7 +28,7 @@
   "homepage": "https://github.com/Judahh/flexiblePersistence#readme",
   "dependencies": {
     "express": "4.17.1",
-    "default-initializer": "0.0.3",
+    "default-initializer": "0.0.4",
     "ts-mixer": "5.3.0",
     "bignumber.js": "9.0.0",
     "journaly": "1.0.1"
