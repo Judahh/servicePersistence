@@ -13,11 +13,11 @@ jobs:
     # runs all of the steps inside the specified container rather than on the VM host.
     # Because of this the network configuration changes from host based network to a container network.
     container:
-      image: node
+      image: node:latest
 
     services:
       postgres:
-        image: postgres:10.8
+        image: postgres:latest
         env:
           POSTGRES_USER: postgres
           POSTGRES_DB: postgres
@@ -32,7 +32,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [latest]
 
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
