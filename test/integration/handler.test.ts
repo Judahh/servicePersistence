@@ -15,6 +15,7 @@ let read;
 let write;
 
 test('add and read array and find object', async (done) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const journaly = new Journaly();
   new TestService({
     journaly: journaly,
