@@ -19,7 +19,7 @@ export default class TestService
   implements PersistenceAdapter {
   constructor(initDefault: DefaultInitializer) {
     super(initDefault);
-    initDefault;
+    //! TODO WHY a "initDefault;"
   }
 
   close(): Promise<unknown> {
