@@ -12,10 +12,16 @@ import {
   PersistencePromise,
 } from 'flexiblepersistence';
 import { settings } from 'ts-mixer';
+import { DefaultInitializer } from 'default-initializer';
 settings.initFunction = 'init';
 export default class TestService
   extends BaseServiceDefault
   implements PersistenceAdapter {
+  constructor(initDefault: DefaultInitializer) {
+    super(initDefault);
+    //! TODO WHY a "initDefault;"
+  }
+
   close(): Promise<unknown> {
     throw new Error('Method not implemented.');
   }
