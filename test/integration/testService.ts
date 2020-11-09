@@ -25,7 +25,7 @@ export default class TestService
   close(): Promise<unknown> {
     throw new Error('Method not implemented.');
   }
-  getDatabaseInfo() {
+  getPersistenceInfo() {
     throw new Error('Method not implemented.');
   }
   existent(input: PersistenceInputCreate): Promise<PersistencePromise> {

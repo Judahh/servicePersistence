@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   PersistenceAdapter,
-  DatabaseInfo,
+  PersistenceInfo,
   PersistencePromise,
   // RelationValueServiceHandler,
   // SelectedItemValue,
@@ -10,12 +10,11 @@ import {
   PersistenceInputRead,
   PersistenceInputDelete,
 } from 'flexiblepersistence';
-import { ServiceInfo } from './serviceInfo';
 export class ServiceHandler implements PersistenceAdapter {
-  private databaseInfo: ServiceInfo;
+  private persistenceInfo: PersistenceInfo;
 
-  constructor(databaseInfo: ServiceInfo) {
-    this.databaseInfo = databaseInfo;
+  constructor(persistenceInfo: PersistenceInfo) {
+    this.persistenceInfo = persistenceInfo;
   }
   close(): Promise<any> {
     throw new Error('Method not implemented.');
@@ -29,7 +28,7 @@ export class ServiceHandler implements PersistenceAdapter {
     input: PersistenceInputUpdate
   ): Promise<PersistencePromise> {
     return (
-      await this.databaseInfo.journaly.publish(
+      await this.persistenceInfo.journaly.publish(
         this.getFormattedScheme(input.scheme) + 'Service.correct',
         input
       )
@@ -40,7 +39,7 @@ export class ServiceHandler implements PersistenceAdapter {
     input: PersistenceInputDelete
   ): Promise<PersistencePromise> {
     return (
-      await this.databaseInfo.journaly.publish(
+      await this.persistenceInfo.journaly.publish(
         this.getFormattedScheme(input.scheme) + 'Service.nonexistent',
         input
       )
@@ -51,7 +50,7 @@ export class ServiceHandler implements PersistenceAdapter {
     input: PersistenceInputCreate
   ): Promise<PersistencePromise> {
     return (
-      await this.databaseInfo.journaly.publish(
+      await this.persistenceInfo.journaly.publish(
         this.getFormattedScheme(input.scheme) + 'Service.existent',
         input
       )
@@ -62,7 +61,7 @@ export class ServiceHandler implements PersistenceAdapter {
     input: PersistenceInputCreate
   ): Promise<PersistencePromise> {
     return (
-      await this.databaseInfo.journaly.publish(
+      await this.persistenceInfo.journaly.publish(
         this.getFormattedScheme(input.scheme) + 'Service.create',
         input
       )
@@ -72,7 +71,7 @@ export class ServiceHandler implements PersistenceAdapter {
     input: PersistenceInputUpdate
   ): Promise<PersistencePromise> {
     return (
-      await this.databaseInfo.journaly.publish(
+      await this.persistenceInfo.journaly.publish(
         this.getFormattedScheme(input.scheme) + 'Service.update',
         input
       )
@@ -80,7 +79,7 @@ export class ServiceHandler implements PersistenceAdapter {
   }
   public async read(input: PersistenceInputRead): Promise<PersistencePromise> {
     return (
-      await this.databaseInfo.journaly.publish(
+      await this.persistenceInfo.journaly.publish(
         this.getFormattedScheme(input.scheme) + 'Service.read',
         input
       )
@@ -90,14 +89,14 @@ export class ServiceHandler implements PersistenceAdapter {
     input: PersistenceInputDelete
   ): Promise<PersistencePromise> {
     return (
-      await this.databaseInfo.journaly.publish(
+      await this.persistenceInfo.journaly.publish(
         this.getFormattedScheme(input.scheme) + 'Service.delete',
         input
       )
     )[0];
   }
 
-  public getDatabaseInfo(): DatabaseInfo {
-    return this.databaseInfo;
+  public getPersistenceInfo(): PersistenceInfo {
+    return this.persistenceInfo;
   }
 }
