@@ -1,13 +1,12 @@
 import {
   Handler,
-  DatabaseInfo,
+  PersistenceInfo,
   Operation,
   Event,
   MongoDB,
 } from 'flexiblepersistence';
 
 import { ServiceHandler } from '../../source/serviceHandler';
-import { ServiceInfo } from '../../source/serviceInfo';
 import { Journaly } from 'journaly';
 import TestService from './testService';
 
@@ -20,13 +19,16 @@ test('add and read array and find object', async (done) => {
   new TestService({
     journaly: journaly,
   });
-  read = new ServiceHandler(new ServiceInfo({}, journaly));
+  read = new ServiceHandler(new PersistenceInfo({}, journaly));
   write = new MongoDB(
-    new DatabaseInfo({
-      database: 'write',
-      host: process.env.MONGO_HOST || 'localhost',
-      port: process.env.MONGO_PORT,
-    })
+    new PersistenceInfo(
+      {
+        database: 'write',
+        host: process.env.MONGO_HOST || 'localhost',
+        port: process.env.MONGO_PORT,
+      },
+      journaly
+    )
   );
   // console.log(journaly.getSubjects());
   const handler = new Handler(write, read);
