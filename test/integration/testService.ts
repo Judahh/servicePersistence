@@ -42,13 +42,17 @@ export default class TestService
   }
   create(input: PersistenceInputCreate): Promise<PersistencePromise> {
     return new Promise<PersistencePromise>((resolve) => {
-      resolve(
-        new PersistencePromise({
-          receivedItem: 'create.receivedItem',
-          result: 'create.result',
-          selectedItem: 'create.selectedItem',
-          sentItem: 'create.sentItem',
-        })
+      setTimeout(
+        () =>
+          resolve(
+            new PersistencePromise({
+              receivedItem: 'create.receivedItem',
+              result: 'create.result',
+              selectedItem: 'create.selectedItem',
+              sentItem: 'create.sentItem',
+            })
+          ),
+        1000
       );
     });
   }

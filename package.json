@@ -1,6 +1,6 @@
 {
   "name": "@flexiblepersistence/service",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/source/index.js",
   "publishConfig": {
