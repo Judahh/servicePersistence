@@ -24,76 +24,49 @@ export class ServiceHandler implements PersistenceAdapter {
     return scheme.charAt(0).toUpperCase() + scheme.slice(1);
   }
 
-  public async correct(
-    input: PersistenceInputUpdate
-  ): Promise<PersistencePromise> {
-    return (
-      await this.persistenceInfo.journaly.publish(
-        this.getFormattedScheme(input.scheme) + 'Service.correct',
+  private persistencePromise(input, method, resolve, reject) {
+    this.persistenceInfo.journaly
+      .publish(
+        this.getFormattedScheme(input.scheme) + 'Service.' + method,
         input
       )
-    )[0];
+      .then((output) => {
+        resolve(output);
+      })
+      .catch((error) => {
+        reject(error);
+      });
   }
 
-  public async nonexistent(
-    input: PersistenceInputDelete
-  ): Promise<PersistencePromise> {
-    return (
-      await this.persistenceInfo.journaly.publish(
-        this.getFormattedScheme(input.scheme) + 'Service.nonexistent',
-        input
-      )
-    )[0];
+  private makePromise(input, method): Promise<PersistencePromise> {
+    return new Promise((resolve, reject) => {
+      this.persistencePromise(input, method, resolve, reject);
+    });
   }
 
-  public async existent(
-    input: PersistenceInputCreate
-  ): Promise<PersistencePromise> {
-    return (
-      await this.persistenceInfo.journaly.publish(
-        this.getFormattedScheme(input.scheme) + 'Service.existent',
-        input
-      )
-    )[0];
+  correct(input: PersistenceInputUpdate): Promise<PersistencePromise> {
+    return this.makePromise(input, 'correct');
   }
 
-  public async create(
-    input: PersistenceInputCreate
-  ): Promise<PersistencePromise> {
-    return (
-      await this.persistenceInfo.journaly.publish(
-        this.getFormattedScheme(input.scheme) + 'Service.create',
-        input
-      )
-    )[0];
+  nonexistent(input: PersistenceInputDelete): Promise<PersistencePromise> {
+    return this.makePromise(input, 'nonexistent');
   }
-  public async update(
-    input: PersistenceInputUpdate
-  ): Promise<PersistencePromise> {
-    return (
-      await this.persistenceInfo.journaly.publish(
-        this.getFormattedScheme(input.scheme) + 'Service.update',
-        input
-      )
-    )[0];
+
+  existent(input: PersistenceInputCreate): Promise<PersistencePromise> {
+    return this.makePromise(input, 'existent');
   }
-  public async read(input: PersistenceInputRead): Promise<PersistencePromise> {
-    return (
-      await this.persistenceInfo.journaly.publish(
-        this.getFormattedScheme(input.scheme) + 'Service.read',
-        input
-      )
-    )[0];
+
+  create(input: PersistenceInputCreate): Promise<PersistencePromise> {
+    return this.makePromise(input, 'create');
   }
-  public async delete(
-    input: PersistenceInputDelete
-  ): Promise<PersistencePromise> {
-    return (
-      await this.persistenceInfo.journaly.publish(
-        this.getFormattedScheme(input.scheme) + 'Service.delete',
-        input
-      )
-    )[0];
+  update(input: PersistenceInputUpdate): Promise<PersistencePromise> {
+    return this.makePromise(input, 'update');
+  }
+  read(input: PersistenceInputRead): Promise<PersistencePromise> {
+    return this.makePromise(input, 'read');
+  }
+  delete(input: PersistenceInputDelete): Promise<PersistencePromise> {
+    return this.makePromise(input, 'delete');
   }
 
   public getPersistenceInfo(): PersistenceInfo {

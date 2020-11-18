@@ -7,7 +7,7 @@ import {
 } from 'flexiblepersistence';
 
 import { ServiceHandler } from '../../source/serviceHandler';
-import { Journaly } from 'journaly';
+import { Journaly, SubjectObserver } from 'journaly';
 import TestService from './testService';
 
 let read;
@@ -15,7 +15,7 @@ let write;
 
 test('add and read array and find object', async (done) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const journaly = new Journaly();
+  const journaly = Journaly.newJournaly() as SubjectObserver<any>;
   new TestService({
     journaly: journaly,
   });
