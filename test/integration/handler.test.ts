@@ -5,6 +5,7 @@ import {
   Operation,
   Event,
   MongoDB,
+  PersistencePromise,
 } from 'flexiblepersistence';
 
 import { ServiceHandler } from '../../source/serviceHandler';
@@ -41,14 +42,93 @@ test('add and read array and find object', async (done) => {
       new Event({ operation: Operation.create, name: 'test', content: obj })
     );
 
-    expect(persistencePromise.receivedItem).toStrictEqual(
-      'create.receivedItem'
+    expect(persistencePromise).toStrictEqual(
+      new PersistencePromise({
+        receivedItem: 'create.receivedItem',
+        result: 'create.result',
+        selectedItem: 'create.selectedItem',
+        sentItem: 'create.sentItem',
+      })
     );
 
     const persistencePromise1 = await handler.readArray('test', {});
-    expect(persistencePromise1.receivedItem).toStrictEqual('read.receivedItem');
-    expect(persistencePromise1.selectedItem).toStrictEqual('read.selectedItem');
-    expect(persistencePromise1.sentItem).toStrictEqual('read.sentItem');
+
+    expect(persistencePromise1).toStrictEqual(
+      new PersistencePromise({
+        receivedItem: 'read.receivedItem',
+        result: 'read.result',
+        selectedItem: 'read.selectedItem',
+        sentItem: 'read.sentItem',
+      })
+    );
+
+    const persistencePromise2 = await handler.addEvent(
+      new Event({ operation: Operation.existent, name: 'test', content: obj })
+    );
+
+    expect(persistencePromise2).toStrictEqual(
+      new PersistencePromise({
+        receivedItem: 'existent.receivedItem',
+        result: 'existent.result',
+        selectedItem: 'existent.selectedItem',
+        sentItem: 'existent.sentItem',
+      })
+    );
+
+    const persistencePromise3 = await handler.addEvent(
+      new Event({
+        operation: Operation.nonexistent,
+        name: 'test',
+        content: obj,
+      })
+    );
+
+    expect(persistencePromise3).toStrictEqual(
+      new PersistencePromise({
+        receivedItem: 'nonexistent.receivedItem',
+        result: 'nonexistent.result',
+        selectedItem: 'nonexistent.selectedItem',
+        sentItem: 'nonexistent.sentItem',
+      })
+    );
+
+    const persistencePromise4 = await handler.addEvent(
+      new Event({
+        operation: Operation.correct,
+        name: 'test',
+        content: obj,
+      })
+    );
+
+    expect(persistencePromise4).toStrictEqual(
+      new PersistencePromise({
+        receivedItem: 'correct.receivedItem',
+        result: 'correct.result',
+        selectedItem: 'correct.selectedItem',
+        sentItem: 'correct.sentItem',
+      })
+    );
+
+    const persistencePromise5 = await handler.addEvent(
+      new Event({
+        operation: Operation.update,
+        name: 'test',
+        content: obj,
+      })
+    );
+
+    expect(persistencePromise5).toStrictEqual(
+      new PersistencePromise({
+        receivedItem: 'update.receivedItem',
+        result: 'update.result',
+        selectedItem: 'update.selectedItem',
+        sentItem: 'update.sentItem',
+      })
+    );
+
+    expect(read.getPersistenceInfo()).toStrictEqual(
+      new PersistenceInfo({}, journaly)
+    );
   } catch (error) {
     await handler.getWrite().clear('events');
     await write.close();
