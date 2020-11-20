@@ -13,20 +13,20 @@ import {
 } from 'flexiblepersistence';
 import { settings } from 'ts-mixer';
 import { DefaultInitializer } from 'default-initializer';
+import { resolve } from 'path';
 settings.initFunction = 'init';
 export default class TestService
   extends BaseServiceDefault
   implements PersistenceAdapter {
   constructor(initDefault: DefaultInitializer) {
     super(initDefault);
-    //! TODO WHY a "initDefault;"
   }
 
-  close(): Promise<unknown> {
-    throw new Error('Method not implemented.');
+  close(): Promise<boolean> {
+    return new Promise((resolve) => resolve(true));
   }
   getPersistenceInfo() {
-    throw new Error('Method not implemented.');
+    return {};
   }
   existent(input: PersistenceInputCreate): Promise<PersistencePromise> {
     return new Promise<PersistencePromise>((resolve) => {
