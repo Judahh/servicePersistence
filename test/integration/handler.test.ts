@@ -18,10 +18,12 @@ let write;
 test('add and read array and find object', async (done) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const journaly = Journaly.newJournaly() as SubjectObserver<any>;
-  new TestService({
-    journaly: journaly,
+  // new TestService({
+  //   journaly: journaly,
+  // });
+  read = new ServiceHandler(new PersistenceInfo({}, journaly), {
+    test: new TestService(),
   });
-  read = new ServiceHandler(new PersistenceInfo({}, journaly));
   write = new MongoDB(
     new PersistenceInfo(
       {

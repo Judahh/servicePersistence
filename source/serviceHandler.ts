@@ -9,12 +9,59 @@ import {
   PersistenceInputUpdate,
   PersistenceInputRead,
   PersistenceInputDelete,
+  DefaultInitializer,
 } from 'flexiblepersistence';
+import { BaseServiceDefault } from '.';
 export class ServiceHandler implements PersistenceAdapter {
   private persistenceInfo: PersistenceInfo;
 
-  constructor(persistenceInfo: PersistenceInfo) {
+  element: {
+    [name: string]: BaseServiceDefault;
+  } = {};
+  persistence?: PersistenceAdapter;
+
+  constructor(
+    persistenceInfo: PersistenceInfo,
+    element?: {
+      [name: string]: BaseServiceDefault;
+    },
+    persistence?: PersistenceAdapter
+  ) {
     this.persistenceInfo = persistenceInfo;
+    if (element) this.setElement(element);
+    if (persistence) this.setPersistence(persistence);
+  }
+
+  protected initElement() {
+    const initDefault: DefaultInitializer = {
+      journaly: this.persistenceInfo.journaly,
+    };
+    for (const key in this.element) {
+      if (Object.prototype.hasOwnProperty.call(this.element, key)) {
+        const element = this.element[key];
+        element.init(initDefault);
+      }
+    }
+  }
+
+  setElement(element: { [name: string]: BaseServiceDefault }) {
+    this.element = element;
+    this.initElement();
+  }
+
+  protected initPersistence() {
+    if (this.persistence)
+      for (const key in this.element) {
+        if (Object.prototype.hasOwnProperty.call(this.element, key)) {
+          const element = this.element[key];
+          element.setPersistence(this.persistence);
+        }
+      }
+  }
+
+  setPersistence(persistence: PersistenceAdapter) {
+    this.persistence = persistence;
+    this.initPersistence();
   }
   close(): Promise<any> {
     throw new Error('Method not implemented.');

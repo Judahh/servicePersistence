@@ -15,10 +15,8 @@ import { settings } from 'ts-mixer';
 import { DefaultInitializer } from 'default-initializer';
 import { resolve } from 'path';
 settings.initFunction = 'init';
-export default class TestService
-  extends BaseServiceDefault
-  implements PersistenceAdapter {
-  constructor(initDefault: DefaultInitializer) {
+export default class TestService extends BaseServiceDefault {
+  constructor(initDefault?: DefaultInitializer) {
     super(initDefault);
   }
 

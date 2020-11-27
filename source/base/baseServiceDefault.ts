@@ -1,26 +1,46 @@
 import { settings } from 'ts-mixer';
-import { Default, DefaultInitializer } from 'default-initializer';
+import { Default } from 'default-initializer';
+import BaseDAODefaultInitializer from './baseDAODefaultInitializer';
+import { PersistenceAdapter, PersistenceInput } from 'flexiblepersistence';
 settings.initFunction = 'init';
 export default class BaseServiceDefault extends Default {
   protected baseClass = 'BaseService';
 
-  protected nameDAO: string | undefined;
+  protected nameScheme: string | undefined;
+
+  protected persistenceType = '';
+
+  persistence?: PersistenceAdapter;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected async dAO(
+  protected async persistencePublish(
     method: string,
-    ...args: any
+    input: PersistenceInput | any
   ): Promise<any[] | undefined> {
-    if (!this.nameDAO && this.element)
-      this.nameDAO = this.element.replace('Service', 'DAO');
-    return this.journaly?.publish(this.nameDAO + '.' + method, ...args);
+    if (this.persistence) {
+      if (!input.scheme) input.scheme = this.nameScheme;
+      return this.persistence[method](input);
+    }
   }
 
-  public constructor(initDefault: DefaultInitializer) {
+  public constructor(initDefault?: BaseDAODefaultInitializer) {
     super(initDefault);
   }
 
-  public init(initDefault: DefaultInitializer): void {
+  init(initDefault?: BaseDAODefaultInitializer): void {
+    // console.log('init:', initDefault);
     super.init(initDefault);
+    if (initDefault && initDefault.persistence)
+      this.setPersistence(initDefault.persistence);
+    if (!this.nameScheme && this.element)
+      this.nameScheme = this.element.replace('Service', this.persistenceType);
+  }
+
+  getPersistence() {
+    return this.persistence;
+  }
+
+  setPersistence(persistence: PersistenceAdapter) {
+    this.persistence = persistence;
   }
 }

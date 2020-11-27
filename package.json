@@ -1,6 +1,6 @@
 {
   "name": "@flexiblepersistence/service",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "",
   "main": "dist/source/index.js",
   "publishConfig": {
@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/Judahh/flexiblePersistence#readme",
   "dependencies": {
-    "default-initializer": "latest",
     "ts-mixer": "latest",
     "journaly": "latest"
   },
