@@ -1,3 +1,4 @@
+// file deepcode ignore no-any: any needed
 import { settings } from 'ts-mixer';
 import { Default } from 'default-initializer';
 import BaseDAODefaultInitializer from './baseDAODefaultInitializer';
