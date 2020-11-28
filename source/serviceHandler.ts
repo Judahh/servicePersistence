@@ -71,7 +71,7 @@ export class ServiceHandler implements PersistenceAdapter {
     return scheme.charAt(0).toUpperCase() + scheme.slice(1);
   }
 
-  private persistencePromise(input, method, resolve, reject) {
+  private PersistencePromise(input, method, resolve, reject) {
     this.persistenceInfo.journaly
       .publish(
         this.getFormattedScheme(input.scheme) + 'Service.' + method,
@@ -85,34 +85,38 @@ export class ServiceHandler implements PersistenceAdapter {
       });
   }
 
-  private makePromise(input, method): Promise<PersistencePromise> {
+  private makePromise(input, method): Promise<PersistencePromise<any>> {
     return new Promise((resolve, reject) => {
-      this.persistencePromise(input, method, resolve, reject);
+      this.PersistencePromise(input, method, resolve, reject);
     });
   }
 
-  correct(input: PersistenceInputUpdate): Promise<PersistencePromise> {
+  correct(
+    input: PersistenceInputUpdate<any>
+  ): Promise<PersistencePromise<any>> {
     return this.makePromise(input, 'correct');
   }
 
-  nonexistent(input: PersistenceInputDelete): Promise<PersistencePromise> {
+  nonexistent(input: PersistenceInputDelete): Promise<PersistencePromise<any>> {
     return this.makePromise(input, 'nonexistent');
   }
 
-  existent(input: PersistenceInputCreate): Promise<PersistencePromise> {
+  existent(
+    input: PersistenceInputCreate<any>
+  ): Promise<PersistencePromise<any>> {
     return this.makePromise(input, 'existent');
   }
 
-  create(input: PersistenceInputCreate): Promise<PersistencePromise> {
+  create(input: PersistenceInputCreate<any>): Promise<PersistencePromise<any>> {
     return this.makePromise(input, 'create');
   }
-  update(input: PersistenceInputUpdate): Promise<PersistencePromise> {
+  update(input: PersistenceInputUpdate<any>): Promise<PersistencePromise<any>> {
     return this.makePromise(input, 'update');
   }
-  read(input: PersistenceInputRead): Promise<PersistencePromise> {
+  read(input: PersistenceInputRead): Promise<PersistencePromise<any>> {
     return this.makePromise(input, 'read');
   }
-  delete(input: PersistenceInputDelete): Promise<PersistencePromise> {
+  delete(input: PersistenceInputDelete): Promise<PersistencePromise<any>> {
     return this.makePromise(input, 'delete');
   }
 
