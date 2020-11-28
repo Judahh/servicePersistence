@@ -2,9 +2,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+// file deepcode ignore no-any: any needed
 import { BaseServiceDefault } from '../../source/index';
 import {
-  PersistenceAdapter,
   PersistenceInputCreate,
   PersistenceInputDelete,
   PersistenceInputUpdate,
@@ -13,7 +13,6 @@ import {
 } from 'flexiblepersistence';
 import { settings } from 'ts-mixer';
 import { DefaultInitializer } from 'default-initializer';
-import { resolve } from 'path';
 settings.initFunction = 'init';
 export default class TestService extends BaseServiceDefault {
   constructor(initDefault?: DefaultInitializer) {
@@ -26,10 +25,12 @@ export default class TestService extends BaseServiceDefault {
   getPersistenceInfo() {
     return {};
   }
-  existent(input: PersistenceInputCreate): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>((resolve) => {
+  existent(
+    input: PersistenceInputCreate<any>
+  ): Promise<PersistencePromise<any>> {
+    return new Promise<PersistencePromise<any>>((resolve) => {
       resolve(
-        new PersistencePromise({
+        new PersistencePromise<any>({
           receivedItem: 'existent.receivedItem',
           result: 'existent.result',
           selectedItem: 'existent.selectedItem',
@@ -38,12 +39,12 @@ export default class TestService extends BaseServiceDefault {
       );
     });
   }
-  create(input: PersistenceInputCreate): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>((resolve) => {
+  create(input: PersistenceInputCreate<any>): Promise<PersistencePromise<any>> {
+    return new Promise<PersistencePromise<any>>((resolve) => {
       setTimeout(
         () =>
           resolve(
-            new PersistencePromise({
+            new PersistencePromise<any>({
               receivedItem: 'create.receivedItem',
               result: 'create.result',
               selectedItem: 'create.selectedItem',
@@ -54,10 +55,10 @@ export default class TestService extends BaseServiceDefault {
       );
     });
   }
-  nonexistent(input: PersistenceInputDelete): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>((resolve) => {
+  nonexistent(input: PersistenceInputDelete): Promise<PersistencePromise<any>> {
+    return new Promise<PersistencePromise<any>>((resolve) => {
       resolve(
-        new PersistencePromise({
+        new PersistencePromise<any>({
           receivedItem: 'nonexistent.receivedItem',
           result: 'nonexistent.result',
           selectedItem: 'nonexistent.selectedItem',
@@ -66,10 +67,10 @@ export default class TestService extends BaseServiceDefault {
       );
     });
   }
-  delete(input: PersistenceInputDelete): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>((resolve) => {
+  delete(input: PersistenceInputDelete): Promise<PersistencePromise<any>> {
+    return new Promise<PersistencePromise<any>>((resolve) => {
       resolve(
-        new PersistencePromise({
+        new PersistencePromise<any>({
           receivedItem: 'delete.receivedItem',
           result: 'delete.result',
           selectedItem: 'delete.selectedItem',
@@ -78,10 +79,12 @@ export default class TestService extends BaseServiceDefault {
       );
     });
   }
-  correct(input: PersistenceInputUpdate): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>((resolve) => {
+  correct(
+    input: PersistenceInputUpdate<any>
+  ): Promise<PersistencePromise<any>> {
+    return new Promise<PersistencePromise<any>>((resolve) => {
       resolve(
-        new PersistencePromise({
+        new PersistencePromise<any>({
           receivedItem: 'correct.receivedItem',
           result: 'correct.result',
           selectedItem: 'correct.selectedItem',
@@ -90,10 +93,10 @@ export default class TestService extends BaseServiceDefault {
       );
     });
   }
-  update(input: PersistenceInputUpdate): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>((resolve) => {
+  update(input: PersistenceInputUpdate<any>): Promise<PersistencePromise<any>> {
+    return new Promise<PersistencePromise<any>>((resolve) => {
       resolve(
-        new PersistencePromise({
+        new PersistencePromise<any>({
           receivedItem: 'update.receivedItem',
           result: 'update.result',
           selectedItem: 'update.selectedItem',
@@ -102,10 +105,10 @@ export default class TestService extends BaseServiceDefault {
       );
     });
   }
-  read(input: PersistenceInputRead): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>((resolve) => {
+  read(input: PersistenceInputRead): Promise<PersistencePromise<any>> {
+    return new Promise<PersistencePromise<any>>((resolve) => {
       resolve(
-        new PersistencePromise({
+        new PersistencePromise<any>({
           receivedItem: 'read.receivedItem',
           result: 'read.result',
           selectedItem: 'read.selectedItem',
