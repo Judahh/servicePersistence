@@ -36,7 +36,7 @@ test('add and read array and find object', async (done) => {
   );
   // console.log(journaly.getSubjects());
   const handler = new Handler(write, read);
-  await handler.getWrite().clear('events');
+  await handler.getWrite().clear();
   const obj = {};
   obj['test'] = 'test';
   try {
@@ -132,7 +132,7 @@ test('add and read array and find object', async (done) => {
       new PersistenceInfo({}, journaly)
     );
   } catch (error) {
-    await handler.getWrite().clear('events');
+    await handler.getWrite().clear();
     await write.close();
     console.error(error);
     expect(error).toBe(null);
@@ -141,7 +141,7 @@ test('add and read array and find object', async (done) => {
   await handler.addEvent(
     new Event({ operation: Operation.delete, name: 'test' })
   );
-  await handler.getWrite().clear('events');
+  await handler.getWrite().clear();
   await write.close();
   done();
 });
