@@ -32,6 +32,10 @@ export class ServiceHandler implements PersistenceAdapter {
     if (element) this.setElement(element);
     if (persistence) this.setPersistence(persistence);
   }
+  clear(): Promise<boolean> {
+    if (this.persistence) return this.persistence.clear();
+    throw new Error('Persistence nonexistent.');
+  }
 
   protected initElement() {
     const initDefault: DefaultInitializer = {
@@ -65,7 +69,8 @@ export class ServiceHandler implements PersistenceAdapter {
     this.initPersistence();
   }
   close(): Promise<any> {
-    throw new Error('Method not implemented.');
+    if (this.persistence) return this.persistence.close();
+    throw new Error('Persistence nonexistent.');
   }
 
   private getFormattedScheme(scheme: string): string {
