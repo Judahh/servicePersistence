@@ -11,6 +11,7 @@ import {
   PersistenceInputRead,
   PersistenceInputDelete,
   DefaultInitializer,
+  PersistenceInput,
 } from 'flexiblepersistence';
 import { BaseServiceDefault } from '.';
 export class ServiceHandler implements PersistenceAdapter {
@@ -101,6 +102,10 @@ export class ServiceHandler implements PersistenceAdapter {
     input: PersistenceInputUpdate<any>
   ): Promise<PersistencePromise<any>> {
     return this.makePromise(input, 'correct');
+  }
+
+  other(input: PersistenceInput<any>): Promise<PersistencePromise<any>> {
+    return this.makePromise(input, 'other');
   }
 
   nonexistent(input: PersistenceInputDelete): Promise<PersistencePromise<any>> {
