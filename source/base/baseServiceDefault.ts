@@ -1,7 +1,7 @@
 // file deepcode ignore no-any: any needed
 import { settings } from 'ts-mixer';
 import { Default } from 'flexiblepersistence';
-import BaseDAODefaultInitializer from './baseDAODefaultInitializer';
+import BaseServiceDefaultInitializer from './baseServiceDefaultInitializer';
 import {
   PersistenceAdapter,
   PersistenceInput,
@@ -17,6 +17,10 @@ export default class BaseServiceDefault
   extends Default
   implements SRARAdapter<any, any> {
   persistence?: PersistenceAdapter;
+
+  other(input: PersistenceInput<any>): Promise<PersistencePromise<any>> {
+    return this.persistencePublish('other', input);
+  }
 
   existent(
     input: PersistenceInputCreate<any>
@@ -58,14 +62,14 @@ export default class BaseServiceDefault
     throw new Error('There is no Persistence connected.');
   }
 
-  public constructor(initDefault?: BaseDAODefaultInitializer) {
+  public constructor(initDefault?: BaseServiceDefaultInitializer) {
     super(initDefault);
   }
   protected generateName() {
     this.setName(this.getClassName().replace('Service', this.getType()));
   }
 
-  init(initDefault?: BaseDAODefaultInitializer): void {
+  init(initDefault?: BaseServiceDefaultInitializer): void {
     // console.log('init:', initDefault);
     super.init(initDefault);
     if (initDefault && initDefault.persistence)
