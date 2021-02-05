@@ -18,6 +18,10 @@ export default class BaseServiceDefault
   implements SRARAdapter<any, any> {
   persistence?: PersistenceAdapter;
 
+  other(input: PersistenceInput<any>): Promise<PersistencePromise<any>> {
+    return this.persistencePublish('other', input);
+  }
+
   existent(
     input: PersistenceInputCreate<any>
   ): Promise<PersistencePromise<any>> {
