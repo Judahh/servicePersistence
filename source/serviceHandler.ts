@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // file deepcode ignore no-any: any needed
 import {
@@ -10,9 +11,9 @@ import {
   PersistenceInputUpdate,
   PersistenceInputRead,
   PersistenceInputDelete,
-  DefaultInitializer,
   PersistenceInput,
 } from 'flexiblepersistence';
+import { DefaultInitializer } from '@flexiblepersistence/default-initializer';
 import { BaseServiceDefault } from '.';
 export class ServiceHandler implements PersistenceAdapter {
   private persistenceInfo: PersistenceInfo;

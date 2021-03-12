@@ -1,6 +1,6 @@
 {
   "name": "@flexiblepersistence/service",
-  "version": "0.1.18",
+  "version": "0.2.0",
   "description": "A Service implementation for Flexible Persistence's PersistenceAdapter",
   "main": "dist/source/index.js",
   "keywords": [
@@ -39,6 +39,7 @@
     "journaly": "latest"
   },
   "devDependencies": {
+    "@flexiblepersistence/default-initializer": "latest",
     "flexiblepersistence": "latest",
     "@types/jest": "latest",
     "@types/node": "latest",

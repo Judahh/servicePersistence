@@ -1,4 +1,5 @@
-import { DefaultInitializer, PersistenceAdapter } from 'flexiblepersistence';
+import { PersistenceAdapter } from 'flexiblepersistence';
+import { DefaultInitializer } from '@flexiblepersistence/default-initializer';
 
 export default interface BaseServiceDefaultInitializer
   extends DefaultInitializer {
