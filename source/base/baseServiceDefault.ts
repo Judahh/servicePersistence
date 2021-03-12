@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // file deepcode ignore no-any: any needed
 import { settings } from 'ts-mixer';
-import { Default } from 'flexiblepersistence';
+import { Default } from '@flexiblepersistence/default-initializer';
 import BaseServiceDefaultInitializer from './baseServiceDefaultInitializer';
 import {
   PersistenceAdapter,

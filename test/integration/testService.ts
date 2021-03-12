@@ -12,7 +12,7 @@ import {
   PersistencePromise,
 } from 'flexiblepersistence';
 import { settings } from 'ts-mixer';
-import { DefaultInitializer } from 'flexiblepersistence';
+import { DefaultInitializer } from '@flexiblepersistence/default-initializer';
 settings.initFunction = 'init';
 export default class TestService extends BaseServiceDefault {
   constructor(initDefault?: DefaultInitializer) {
