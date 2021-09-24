@@ -1,15 +1,15 @@
-import BaseServiceDefaultInitializer from './base/baseServiceDefaultInitializer';
+import IBaseServiceDefault from './base/iBaseServiceDefault';
 import BaseServiceDefault from './base/baseServiceDefault';
 
-import ServiceModel from './model/serviceModel';
-import ServiceSimpleModel from './model/serviceSimpleModel';
+import IServiceModel from './model/iServiceModel';
+import IServiceSimpleModel from './model/iServiceSimpleModel';
 
 import { ServiceHandler } from './serviceHandler';
 
 export {
-  BaseServiceDefaultInitializer,
+  IBaseServiceDefault,
   BaseServiceDefault,
-  ServiceModel,
-  ServiceSimpleModel,
+  IServiceModel,
+  IServiceSimpleModel,
   ServiceHandler,
 };
