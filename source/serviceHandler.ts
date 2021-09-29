@@ -2,33 +2,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // file deepcode ignore no-any: any needed
 import {
-  PersistenceAdapter,
+  IPersistence,
   PersistenceInfo,
-  PersistencePromise,
+  IOutput,
   // RelationValueServiceHandler,
   // SelectedItemValue,
-  PersistenceInputCreate,
-  PersistenceInputUpdate,
-  PersistenceInputRead,
-  PersistenceInputDelete,
-  PersistenceInput,
+  IInputCreate,
+  IInputUpdate,
+  IInputRead,
+  IInputDelete,
+  IInput,
 } from 'flexiblepersistence';
-import { DefaultInitializer } from '@flexiblepersistence/default-initializer';
+import { IDefault } from '@flexiblepersistence/default-initializer';
 import { BaseServiceDefault } from '.';
-export class ServiceHandler implements PersistenceAdapter {
+export class ServiceHandler implements IPersistence {
   private persistenceInfo: PersistenceInfo;
 
   element: {
     [name: string]: BaseServiceDefault;
   } = {};
-  persistence?: PersistenceAdapter;
+  persistence?: IPersistence;
 
   constructor(
     persistenceInfo: PersistenceInfo,
     element?: {
       [name: string]: BaseServiceDefault;
     },
-    persistence?: PersistenceAdapter
+    persistence?: IPersistence
   ) {
     this.persistenceInfo = persistenceInfo;
     if (element) this.setElement(element);
@@ -40,7 +40,7 @@ export class ServiceHandler implements PersistenceAdapter {
   }
 
   protected initElement() {
-    const initDefault: DefaultInitializer = {
+    const initDefault: IDefault = {
       journaly: this.persistenceInfo.journaly,
     };
     for (const key in this.element) {
@@ -66,7 +66,7 @@ export class ServiceHandler implements PersistenceAdapter {
       }
   }
 
-  setPersistence(persistence: PersistenceAdapter) {
+  setPersistence(persistence: IPersistence) {
     this.persistence = persistence;
     this.initPersistence();
   }
@@ -93,42 +93,38 @@ export class ServiceHandler implements PersistenceAdapter {
       });
   }
 
-  private makePromise(input, method): Promise<PersistencePromise<any>> {
+  private makePromise(input, method): Promise<IOutput<unknown, unknown>> {
     return new Promise((resolve, reject) => {
       this.PersistencePromise(input, method, resolve, reject);
     });
   }
 
-  correct(
-    input: PersistenceInputUpdate<any>
-  ): Promise<PersistencePromise<any>> {
+  correct(input: IInputUpdate<any>): Promise<IOutput<unknown, unknown>> {
     return this.makePromise(input, 'correct');
   }
 
-  other(input: PersistenceInput<any>): Promise<PersistencePromise<any>> {
+  other(input: IInput<any>): Promise<IOutput<unknown, unknown>> {
     return this.makePromise(input, 'other');
   }
 
-  nonexistent(input: PersistenceInputDelete): Promise<PersistencePromise<any>> {
+  nonexistent(input: IInputDelete): Promise<IOutput<unknown, unknown>> {
     return this.makePromise(input, 'nonexistent');
   }
 
-  existent(
-    input: PersistenceInputCreate<any>
-  ): Promise<PersistencePromise<any>> {
+  existent(input: IInputCreate<any>): Promise<IOutput<unknown, unknown>> {
     return this.makePromise(input, 'existent');
   }
 
-  create(input: PersistenceInputCreate<any>): Promise<PersistencePromise<any>> {
+  create(input: IInputCreate<any>): Promise<IOutput<unknown, unknown>> {
     return this.makePromise(input, 'create');
   }
-  update(input: PersistenceInputUpdate<any>): Promise<PersistencePromise<any>> {
+  update(input: IInputUpdate<any>): Promise<IOutput<unknown, unknown>> {
     return this.makePromise(input, 'update');
   }
-  read(input: PersistenceInputRead): Promise<PersistencePromise<any>> {
+  read(input: IInputRead): Promise<IOutput<unknown, unknown>> {
     return this.makePromise(input, 'read');
   }
-  delete(input: PersistenceInputDelete): Promise<PersistencePromise<any>> {
+  delete(input: IInputDelete): Promise<IOutput<unknown, unknown>> {
     return this.makePromise(input, 'delete');
   }
 
