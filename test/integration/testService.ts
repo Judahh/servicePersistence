@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // file deepcode ignore no-any: any needed
-import { BaseServiceDefault } from '../../source/index';
+import { BaseService } from '../../source/index';
 import {
   IInputCreate,
   IInputDelete,
@@ -14,7 +14,7 @@ import {
 import { settings } from 'ts-mixer';
 import { IDefault } from '@flexiblepersistence/default-initializer';
 settings.initFunction = 'init';
-export default class TestService extends BaseServiceDefault {
+export default class TestService extends BaseService {
   constructor(initDefault?: IDefault) {
     super(initDefault);
   }

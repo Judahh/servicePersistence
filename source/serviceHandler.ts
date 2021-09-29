@@ -14,19 +14,19 @@ import {
   IInput,
 } from 'flexiblepersistence';
 import { IDefault } from '@flexiblepersistence/default-initializer';
-import { BaseServiceDefault } from '.';
+import { BaseService } from '.';
 export class ServiceHandler implements IPersistence {
   private persistenceInfo: PersistenceInfo;
 
   element: {
-    [name: string]: BaseServiceDefault;
+    [name: string]: BaseService;
   } = {};
   persistence?: IPersistence;
 
   constructor(
     persistenceInfo: PersistenceInfo,
     element?: {
-      [name: string]: BaseServiceDefault;
+      [name: string]: BaseService;
     },
     persistence?: IPersistence
   ) {
@@ -51,7 +51,7 @@ export class ServiceHandler implements IPersistence {
     }
   }
 
-  setElement(element: { [name: string]: BaseServiceDefault }) {
+  setElement(element: { [name: string]: BaseService }) {
     this.element = element;
     this.initElement();
   }
