@@ -3,7 +3,7 @@
 // file deepcode ignore no-any: any needed
 import { settings } from 'ts-mixer';
 import { Default } from '@flexiblepersistence/default-initializer';
-import BaseServiceDefaultInitializer from './iBaseServiceDefault';
+import IBaseService from './iBaseService';
 import {
   IPersistence,
   IInput,
@@ -15,10 +15,7 @@ import {
   ISRAR,
 } from 'flexiblepersistence';
 settings.initFunction = 'init';
-export default class BaseServiceDefault
-  extends Default
-  implements ISRAR<any, any>
-{
+export default class BaseService extends Default implements ISRAR<any, any> {
   persistence?: IPersistence;
 
   other(input: IInput<any>): Promise<IOutput<unknown, unknown>> {
@@ -61,14 +58,14 @@ export default class BaseServiceDefault
     throw new Error('There is no Persistence connected.');
   }
 
-  public constructor(initDefault?: BaseServiceDefaultInitializer) {
+  public constructor(initDefault?: IBaseService) {
     super(initDefault);
   }
   protected generateName() {
     this.setName(this.getClassName().replace('Service', this.getType()));
   }
 
-  init(initDefault?: BaseServiceDefaultInitializer): void {
+  init(initDefault?: IBaseService): void {
     // console.log('init:', initDefault);
     super.init(initDefault);
     if (initDefault && initDefault.persistence)
