@@ -1,6 +1,6 @@
 {
   "name": "@flexiblepersistence/service",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "A Service implementation for Flexible Persistence's PersistenceAdapter",
   "main": "dist/source/index.js",
   "keywords": [
@@ -41,7 +41,7 @@
   "devDependencies": {
     "@flexiblepersistence/default-initializer": "latest",
     "flexiblepersistence": "latest",
-    "@types/jest": "latest",
+    "@types/jest": "26.0.24",
     "@types/node": "latest",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
@@ -50,10 +50,10 @@
     "eslint-plugin-filenames": "latest",
     "eslint-plugin-prettier": "latest",
     "eslint-plugin-import": "latest",
-    "jest": "latest",
+    "jest": "26.6.2",
     "prettier": "latest",
     "reflect-metadata": "latest",
-    "ts-jest": "latest",
+    "ts-jest": "26.5.6",
     "typescript": "latest"
   }
 }

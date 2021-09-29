@@ -3,60 +3,57 @@
 // file deepcode ignore no-any: any needed
 import { settings } from 'ts-mixer';
 import { Default } from '@flexiblepersistence/default-initializer';
-import BaseServiceDefaultInitializer from './baseServiceDefaultInitializer';
+import BaseServiceDefaultInitializer from './iBaseServiceDefault';
 import {
-  PersistenceAdapter,
-  PersistenceInput,
-  PersistenceInputCreate,
-  PersistenceInputDelete,
-  PersistenceInputRead,
-  PersistenceInputUpdate,
-  PersistencePromise,
-  SRARAdapter,
+  IPersistence,
+  IInput,
+  IInputCreate,
+  IInputDelete,
+  IInputRead,
+  IInputUpdate,
+  IOutput,
+  ISRAR,
 } from 'flexiblepersistence';
 settings.initFunction = 'init';
 export default class BaseServiceDefault
   extends Default
-  implements SRARAdapter<any, any> {
-  persistence?: PersistenceAdapter;
+  implements ISRAR<any, any>
+{
+  persistence?: IPersistence;
 
-  other(input: PersistenceInput<any>): Promise<PersistencePromise<any>> {
+  other(input: IInput<any>): Promise<IOutput<unknown, unknown>> {
     return this.persistencePublish('other', input);
   }
 
-  existent(
-    input: PersistenceInputCreate<any>
-  ): Promise<PersistencePromise<any>> {
+  existent(input: IInputCreate<any>): Promise<IOutput<unknown, unknown>> {
     return this.persistencePublish('existent', input);
   }
-  create(input: PersistenceInputCreate<any>): Promise<PersistencePromise<any>> {
+  create(input: IInputCreate<any>): Promise<IOutput<unknown, unknown>> {
     return this.persistencePublish('create', input);
   }
 
-  nonexistent(input: PersistenceInputDelete): Promise<PersistencePromise<any>> {
+  nonexistent(input: IInputDelete): Promise<IOutput<unknown, unknown>> {
     return this.persistencePublish('nonexistent', input);
   }
-  delete(input: PersistenceInputDelete): Promise<PersistencePromise<any>> {
+  delete(input: IInputDelete): Promise<IOutput<unknown, unknown>> {
     return this.persistencePublish('delete', input);
   }
-  read(input: PersistenceInputRead): Promise<PersistencePromise<any>> {
+  read(input: IInputRead): Promise<IOutput<unknown, unknown>> {
     return this.persistencePublish('read', input);
   }
-  correct(
-    input: PersistenceInputUpdate<any>
-  ): Promise<PersistencePromise<any>> {
+  correct(input: IInputUpdate<any>): Promise<IOutput<unknown, unknown>> {
     return this.persistencePublish('correct', input);
   }
 
-  update(input: PersistenceInputUpdate<any>): Promise<PersistencePromise<any>> {
+  update(input: IInputUpdate<any>): Promise<IOutput<unknown, unknown>> {
     return this.persistencePublish('update', input);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async persistencePublish(
     method: string,
-    input: PersistenceInput<any>
-  ): Promise<PersistencePromise<any>> {
+    input: IInput<any>
+  ): Promise<IOutput<unknown, unknown>> {
     if (this.persistence) {
       if (!input.scheme) input.scheme = this.getName();
       return this.persistence[method](input);
@@ -82,7 +79,7 @@ export default class BaseServiceDefault
     return this.persistence;
   }
 
-  setPersistence(persistence: PersistenceAdapter) {
+  setPersistence(persistence: IPersistence) {
     this.persistence = persistence;
   }
 }
