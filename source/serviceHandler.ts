@@ -19,14 +19,14 @@ export class ServiceHandler implements IPersistence {
   private persistenceInfo: PersistenceInfo;
 
   element: {
-    [name: string]: BaseService;
+    [name: string]: BaseService<any, any>;
   } = {};
   persistence?: IPersistence;
 
   constructor(
     persistenceInfo: PersistenceInfo,
     element?: {
-      [name: string]: BaseService;
+      [name: string]: BaseService<any, any>;
     },
     persistence?: IPersistence
   ) {
@@ -51,7 +51,7 @@ export class ServiceHandler implements IPersistence {
     }
   }
 
-  setElement(element: { [name: string]: BaseService }) {
+  setElement(element: { [name: string]: BaseService<any, any> }) {
     this.element = element;
     this.initElement();
   }

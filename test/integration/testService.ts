@@ -14,7 +14,7 @@ import {
 import { settings } from 'ts-mixer';
 import { IDefault } from '@flexiblepersistence/default-initializer';
 settings.initFunction = 'init';
-export default class TestService extends BaseService {
+export default class TestService extends BaseService<unknown, unknown> {
   constructor(initDefault?: IDefault) {
     super(initDefault);
   }
