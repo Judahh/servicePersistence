@@ -15,42 +15,45 @@ import {
   ISRAR,
 } from 'flexiblepersistence';
 settings.initFunction = 'init';
-export default class BaseService extends Default implements ISRAR<any, any> {
+export default class BaseService<Input, Output>
+  extends Default
+  implements ISRAR<Input, Output>
+{
   persistence?: IPersistence;
 
-  other(input: IInput<any>): Promise<IOutput<unknown, unknown>> {
+  other(input: IInput<Input>): Promise<IOutput<Input, Output>> {
     return this.persistencePublish('other', input);
   }
 
-  existent(input: IInputCreate<any>): Promise<IOutput<unknown, unknown>> {
-    return this.persistencePublish('existent', input);
+  existent(input: IInputCreate<Input>): Promise<IOutput<Input, Output>> {
+    return this.persistencePublish('existent', input as IInput<Input>);
   }
-  create(input: IInputCreate<any>): Promise<IOutput<unknown, unknown>> {
-    return this.persistencePublish('create', input);
+  create(input: IInputCreate<Input>): Promise<IOutput<Input, Output>> {
+    return this.persistencePublish('create', input as IInput<Input>);
   }
 
-  nonexistent(input: IInputDelete): Promise<IOutput<unknown, unknown>> {
+  nonexistent(input: IInputDelete): Promise<IOutput<Input, Output>> {
     return this.persistencePublish('nonexistent', input);
   }
-  delete(input: IInputDelete): Promise<IOutput<unknown, unknown>> {
+  delete(input: IInputDelete): Promise<IOutput<Input, Output>> {
     return this.persistencePublish('delete', input);
   }
-  read(input: IInputRead): Promise<IOutput<unknown, unknown>> {
+  read(input: IInputRead): Promise<IOutput<Input, Output>> {
     return this.persistencePublish('read', input);
   }
-  correct(input: IInputUpdate<any>): Promise<IOutput<unknown, unknown>> {
-    return this.persistencePublish('correct', input);
+  correct(input: IInputUpdate<Input>): Promise<IOutput<Input, Output>> {
+    return this.persistencePublish('correct', input as IInput<Input>);
   }
 
-  update(input: IInputUpdate<any>): Promise<IOutput<unknown, unknown>> {
-    return this.persistencePublish('update', input);
+  update(input: IInputUpdate<Input>): Promise<IOutput<Input, Output>> {
+    return this.persistencePublish('update', input as IInput<Input>);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async persistencePublish(
     method: string,
-    input: IInput<any>
-  ): Promise<IOutput<unknown, unknown>> {
+    input: IInput<Input>
+  ): Promise<IOutput<Input, Output>> {
     if (this.persistence) {
       if (!input.scheme) input.scheme = this.getName();
       return this.persistence[method](input);
