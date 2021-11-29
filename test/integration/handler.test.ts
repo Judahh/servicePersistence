@@ -14,7 +14,7 @@ import TestService from './testService';
 let read;
 let write;
 
-test('add and read array and find object', async (done) => {
+test('add and read array and find object', async () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const journaly = Journaly.newJournaly() as SenderReceiver<any>;
   // new TestService({
@@ -123,12 +123,10 @@ test('add and read array and find object', async (done) => {
     await write.close();
     console.error(error);
     expect(error).toBe(null);
-    done();
   }
   await handler.addEvent(
     new Event({ operation: Operation.delete, name: 'test' })
   );
   await handler.getWrite()?.clear();
   await write.close();
-  done();
 });
