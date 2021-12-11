@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// file deepcode ignore no-any: any needed
-import { settings } from 'ts-mixer';
 import { Default } from '@flexiblepersistence/default-initializer';
 import IBaseService from './iBaseService';
 import {
@@ -14,7 +10,6 @@ import {
   IOutput,
   ISRAR,
 } from 'flexiblepersistence';
-settings.initFunction = 'init';
 export default class BaseService<Input, Output>
   extends Default
   implements ISRAR<Input, Output>
