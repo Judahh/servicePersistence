@@ -35,7 +35,6 @@
   },
   "homepage": "https://github.com/Judahh/flexiblePersistence#readme",
   "dependencies": {
-    "ts-mixer": "latest",
     "journaly": "latest"
   },
   "devDependencies": {
