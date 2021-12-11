@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// file deepcode ignore no-any: any needed
 import { BaseService } from '../../source/index';
 import {
   IInputCreate,
@@ -11,9 +6,7 @@ import {
   IInputRead,
   IOutput,
 } from 'flexiblepersistence';
-import { settings } from 'ts-mixer';
 import { IDefault } from '@flexiblepersistence/default-initializer';
-settings.initFunction = 'init';
 export default class TestService extends BaseService<unknown, unknown> {
   constructor(initDefault?: IDefault) {
     super(initDefault);
