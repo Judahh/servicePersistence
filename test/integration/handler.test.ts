@@ -60,44 +60,51 @@ test('add and read array and find object', async () => {
     });
 
     const persistencePromise2 = await handler.addEvent(
-      new Event({ operation: Operation.existent, name: 'test', content: obj })
+      new Event({
+        operation: Operation.create,
+        correct: true,
+        name: 'test',
+        content: obj,
+      })
     );
 
     expect(persistencePromise2).toStrictEqual({
-      receivedItem: 'existent.receivedItem',
-      result: 'existent.result',
-      selectedItem: 'existent.selectedItem',
-      sentItem: 'existent.sentItem',
+      receivedItem: 'create.receivedItem',
+      result: 'create.result',
+      selectedItem: 'create.selectedItem',
+      sentItem: 'create.sentItem',
     });
 
     const persistencePromise3 = await handler.addEvent(
       new Event({
-        operation: Operation.nonexistent,
+        operation: Operation.delete,
+        correct: true,
         name: 'test',
         content: obj,
       })
     );
 
     expect(persistencePromise3).toStrictEqual({
-      receivedItem: 'nonexistent.receivedItem',
-      result: 'nonexistent.result',
-      selectedItem: 'nonexistent.selectedItem',
-      sentItem: 'nonexistent.sentItem',
+      receivedItem: 'delete.receivedItem',
+      result: 'delete.result',
+      selectedItem: 'delete.selectedItem',
+      sentItem: 'delete.sentItem',
     });
 
     const persistencePromise4 = await handler.addEvent(
       new Event({
-        operation: Operation.correct,
+        operation: Operation.update,
+        correct: true,
         name: 'test',
         content: obj,
       })
     );
 
     expect(persistencePromise4).toStrictEqual({
-      receivedItem: 'correct.receivedItem',
-      result: 'correct.result',
-      selectedItem: 'correct.selectedItem',
-      sentItem: 'correct.sentItem',
+      receivedItem: 'update.receivedItem',
+      result: 'update.result',
+      selectedItem: 'update.selectedItem',
+      sentItem: 'update.sentItem',
     });
 
     const persistencePromise5 = await handler.addEvent(
