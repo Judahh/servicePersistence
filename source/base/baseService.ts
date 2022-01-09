@@ -20,28 +20,20 @@ export default class BaseService<Input, Output>
     return this.persistencePublish('other', input);
   }
 
-  existent(input: IInputCreate<Input>): Promise<IOutput<Input, Output>> {
-    return this.persistencePublish('existent', input as IInput<Input>);
-  }
   create(input: IInputCreate<Input>): Promise<IOutput<Input, Output>> {
     return this.persistencePublish('create', input as IInput<Input>);
   }
 
-  nonexistent(input: IInputDelete): Promise<IOutput<Input, Output>> {
-    return this.persistencePublish('nonexistent', input);
-  }
-  delete(input: IInputDelete): Promise<IOutput<Input, Output>> {
-    return this.persistencePublish('delete', input);
-  }
   read(input: IInputRead): Promise<IOutput<Input, Output>> {
     return this.persistencePublish('read', input);
-  }
-  correct(input: IInputUpdate<Input>): Promise<IOutput<Input, Output>> {
-    return this.persistencePublish('correct', input as IInput<Input>);
   }
 
   update(input: IInputUpdate<Input>): Promise<IOutput<Input, Output>> {
     return this.persistencePublish('update', input as IInput<Input>);
+  }
+
+  delete(input: IInputDelete): Promise<IOutput<Input, Output>> {
+    return this.persistencePublish('delete', input);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,7 +45,8 @@ export default class BaseService<Input, Output>
       if (!input.scheme) input.scheme = this.getName();
       return this.persistence[method](input);
     }
-    throw new Error('There is no Persistence connected.');
+    // throw new Error('There is no Persistence connected.');
+    return input;
   }
 
   public constructor(initDefault?: IBaseService) {
