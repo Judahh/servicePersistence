@@ -99,20 +99,8 @@ export class ServiceHandler implements IPersistence {
     });
   }
 
-  correct(input: IInputUpdate<any>): Promise<IOutput<unknown, unknown>> {
-    return this.makePromise(input, 'correct');
-  }
-
   other(input: IInput<any>): Promise<IOutput<unknown, unknown>> {
     return this.makePromise(input, 'other');
-  }
-
-  nonexistent(input: IInputDelete): Promise<IOutput<unknown, unknown>> {
-    return this.makePromise(input, 'nonexistent');
-  }
-
-  existent(input: IInputCreate<any>): Promise<IOutput<unknown, unknown>> {
-    return this.makePromise(input, 'existent');
   }
 
   create(input: IInputCreate<any>): Promise<IOutput<unknown, unknown>> {
