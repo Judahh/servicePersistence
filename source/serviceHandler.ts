@@ -24,7 +24,7 @@ export class ServiceHandler implements IPersistence {
   persistence?: IPersistence;
 
   constructor(
-    persistenceInfo: PersistenceInfo,
+    persistenceInfo?: PersistenceInfo,
     element?: {
       [name: string]: BaseService<any, any>;
     },
