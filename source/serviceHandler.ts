@@ -15,8 +15,10 @@ import {
 } from 'flexiblepersistence';
 import { IDefault } from '@flexiblepersistence/default-initializer';
 import { BaseService } from '.';
+import { SenderReceiver } from 'journaly';
 export class ServiceHandler implements IPersistence {
-  private persistenceInfo: PersistenceInfo;
+  private persistenceInfo?: PersistenceInfo;
+  private journaly?: SenderReceiver<any>;
 
   element: {
     [name: string]: BaseService<any, any>;
@@ -24,13 +26,18 @@ export class ServiceHandler implements IPersistence {
   persistence?: IPersistence;
 
   constructor(
-    persistenceInfo: PersistenceInfo,
+    persistenceInfoOrJournaly?: PersistenceInfo | SenderReceiver<any>,
     element?: {
       [name: string]: BaseService<any, any>;
     },
     persistence?: IPersistence
   ) {
-    this.persistenceInfo = persistenceInfo;
+    if (persistenceInfoOrJournaly instanceof PersistenceInfo) {
+      this.persistenceInfo = persistenceInfoOrJournaly;
+      this.journaly = this.persistenceInfo?.journaly;
+    } else {
+      this.journaly = persistenceInfoOrJournaly;
+    }
     if (element) this.setElement(element);
     if (persistence) this.setPersistence(persistence);
   }
@@ -41,7 +48,7 @@ export class ServiceHandler implements IPersistence {
 
   protected initElement() {
     const initDefault: IDefault = {
-      journaly: this.persistenceInfo.journaly,
+      journaly: this.journaly,
     };
     for (const key in this.element) {
       if (Object.prototype.hasOwnProperty.call(this.element, key)) {
@@ -80,8 +87,8 @@ export class ServiceHandler implements IPersistence {
   }
 
   private PersistencePromise(input, method, resolve, reject) {
-    this.persistenceInfo.journaly
-      .publish(
+    this.journaly
+      ?.publish(
         this.getFormattedScheme(input.scheme) + 'Service.' + method,
         input
       )
@@ -116,7 +123,7 @@ export class ServiceHandler implements IPersistence {
     return this.makePromise(input, 'delete');
   }
 
-  public getPersistenceInfo(): PersistenceInfo {
+  public getPersistenceInfo(): PersistenceInfo | undefined {
     return this.persistenceInfo;
   }
 }
