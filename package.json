@@ -1,6 +1,6 @@
 {
   "name": "@flexiblepersistence/service",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "A Service implementation for Flexible Persistence's PersistenceAdapter",
   "main": "dist/source/index.js",
   "keywords": [
