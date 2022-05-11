@@ -1,10 +1,14 @@
 # servicePersistence
 
 ![Publish](https://github.com/Judahh/servicePersistence/workflows/Publish/badge.svg)
-[![npm version](https://badge.fury.io/js/@flexiblepersistence/service.svg)](https://badge.fury.io/js/@flexiblepersistence/service)
+[![npm version](https://badge.fury.io/js/@flexiblepersistence%2Fservice.svg)](https://badge.fury.io/js/@flexiblepersistence/service)
 [![npm downloads](https://img.shields.io/npm/dt/@flexiblepersistence/service.svg)](https://img.shields.io/npm/dt/@flexiblepersistence/service.svg)
 
 A Service implementation for Flexible Persistence's PersistenceAdapter
+
+It's used to make operations on the data before it's saved in the database by another Flexible Persistence's PersistenceAdapter.
+
+![Overview](./image/overview.svg)
 
 ```js
 // Init Journaly as a observer platform for using as a message broker
@@ -42,8 +46,6 @@ const persistencePromise = await handler.addEvent(
 // prints create event
 console.log(persistencePromise);
 ```
-
-![Overview](./doc/overview.svg)
 
 ## Installation
 
