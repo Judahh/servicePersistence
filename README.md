@@ -8,6 +8,8 @@ A Service implementation for Flexible Persistence's PersistenceAdapter
 
 It's used to make operations on the data before it's saved in the database by another Flexible Persistence's PersistenceAdapter.
 
+![Overview](./image/overview.svg)
+
 ```js
 // Init Journaly as a observer platform for using as a message broker
 const journaly = Journaly.newJournaly() as SubjectObserver<any>;
@@ -44,8 +46,6 @@ const persistencePromise = await handler.addEvent(
 // prints create event
 console.log(persistencePromise);
 ```
-
-![Overview](./image/overview.svg)
 
 ## Installation
 
