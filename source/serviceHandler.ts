@@ -21,14 +21,14 @@ export class ServiceHandler implements IPersistence {
   private journaly?: SenderReceiver<any>;
 
   element: {
-    [name: string]: BaseService<any, any>;
+    [name: string]: BaseService<any, any, any>;
   } = {};
   persistence?: IPersistence;
 
   constructor(
     persistenceInfoOrJournaly?: PersistenceInfo | SenderReceiver<any>,
     element?: {
-      [name: string]: BaseService<any, any>;
+      [name: string]: BaseService<any, any, any>;
     },
     persistence?: IPersistence
   ) {
@@ -58,7 +58,7 @@ export class ServiceHandler implements IPersistence {
     }
   }
 
-  setElement(element: { [name: string]: BaseService<any, any> }) {
+  setElement(element: { [name: string]: BaseService<any, any, any> }) {
     this.element = element;
     this.initElement();
   }
@@ -100,26 +100,33 @@ export class ServiceHandler implements IPersistence {
       });
   }
 
-  private makePromise(input, method): Promise<IOutput<unknown, unknown>> {
+  private makePromise(
+    input,
+    method
+  ): Promise<IOutput<unknown, unknown, unknown>> {
     return new Promise((resolve, reject) => {
       this.PersistencePromise(input, method, resolve, reject);
     });
   }
 
-  other(input: IInput<any>): Promise<IOutput<unknown, unknown>> {
+  other(
+    input: IInput<unknown, unknown>
+  ): Promise<IOutput<unknown, unknown, unknown>> {
     return this.makePromise(input, 'other');
   }
 
-  create(input: IInputCreate<any>): Promise<IOutput<unknown, unknown>> {
+  create(
+    input: IInputCreate<unknown>
+  ): Promise<IOutput<unknown, unknown, unknown>> {
     return this.makePromise(input, 'create');
   }
-  update(input: IInputUpdate<any>): Promise<IOutput<unknown, unknown>> {
+  update(input: IInputUpdate): Promise<IOutput<unknown, unknown, unknown>> {
     return this.makePromise(input, 'update');
   }
-  read(input: IInputRead): Promise<IOutput<unknown, unknown>> {
+  read(input: IInputRead): Promise<IOutput<unknown, unknown, unknown>> {
     return this.makePromise(input, 'read');
   }
-  delete(input: IInputDelete): Promise<IOutput<unknown, unknown>> {
+  delete(input: IInputDelete): Promise<IOutput<unknown, unknown, unknown>> {
     return this.makePromise(input, 'delete');
   }
 
