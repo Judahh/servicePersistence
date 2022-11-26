@@ -10,37 +10,45 @@ import {
   IOutput,
   ISRAR,
 } from 'flexiblepersistence';
-export default class BaseService<Input, Output>
+export default class BaseService<Filter, Input, Output>
   extends Default
-  implements ISRAR<Input, Output>
+  implements ISRAR<Filter, Input, Output>
 {
   persistence?: IPersistence;
 
-  other(input: IInput<Input>): Promise<IOutput<Input, Output>> {
+  other(input: IInput<Filter, Input>): Promise<IOutput<Filter, Input, Output>> {
     return this.persistencePublish('other', input);
   }
 
-  create(input: IInputCreate<Input>): Promise<IOutput<Input, Output>> {
-    return this.persistencePublish('create', input as IInput<Input>);
+  create(
+    input: IInputCreate<Filter, Input>
+  ): Promise<IOutput<Filter, Input, Output>> {
+    return this.persistencePublish('create', input as IInput<Filter, Input>);
   }
 
-  read(input: IInputRead): Promise<IOutput<Input, Output>> {
+  read(
+    input: IInputRead<Filter, Input>
+  ): Promise<IOutput<Filter, Input, Output>> {
     return this.persistencePublish('read', input);
   }
 
-  update(input: IInputUpdate<Input>): Promise<IOutput<Input, Output>> {
-    return this.persistencePublish('update', input as IInput<Input>);
+  update(
+    input: IInputUpdate<Filter, Input>
+  ): Promise<IOutput<Filter, Input, Output>> {
+    return this.persistencePublish('update', input as IInput<Filter, Input>);
   }
 
-  delete(input: IInputDelete): Promise<IOutput<Input, Output>> {
+  delete(
+    input: IInputDelete<Filter, Input>
+  ): Promise<IOutput<Filter, Input, Output>> {
     return this.persistencePublish('delete', input);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async persistencePublish(
     method: string,
-    input: IInput<Input>
-  ): Promise<IOutput<Input, Output>> {
+    input: IInput<Filter, Input>
+  ): Promise<IOutput<Filter, Input, Output>> {
     if (this.persistence) {
       if (!input.scheme) input.scheme = this.getName();
       return this.persistence[method](input);
