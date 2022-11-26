@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { BaseService } from '../../source/index';
 import {
   IInputCreate,
@@ -7,7 +9,11 @@ import {
   IOutput,
 } from 'flexiblepersistence';
 import { IDefault } from '@flexiblepersistence/default-initializer';
-export default class TestService extends BaseService<unknown, unknown> {
+export default class TestService extends BaseService<
+  unknown,
+  unknown,
+  unknown
+> {
   constructor(initDefault?: IDefault) {
     super(initDefault);
   }
@@ -18,8 +24,10 @@ export default class TestService extends BaseService<unknown, unknown> {
   getPersistenceInfo() {
     return {};
   }
-  existent(input: IInputCreate<any>): Promise<IOutput<unknown, unknown>> {
-    return new Promise<IOutput<unknown, unknown>>((resolve) => {
+  existent(
+    input: IInputCreate<unknown>
+  ): Promise<IOutput<unknown, unknown, unknown>> {
+    return new Promise<IOutput<unknown, unknown, unknown>>((resolve) => {
       resolve({
         receivedItem: 'existent.receivedItem',
         result: 'existent.result',
@@ -28,8 +36,10 @@ export default class TestService extends BaseService<unknown, unknown> {
       });
     });
   }
-  create(input: IInputCreate<any>): Promise<IOutput<unknown, unknown>> {
-    return new Promise<IOutput<unknown, unknown>>((resolve) => {
+  create(
+    input: IInputCreate<any>
+  ): Promise<IOutput<unknown, unknown, unknown>> {
+    return new Promise<IOutput<unknown, unknown, unknown>>((resolve) => {
       setTimeout(
         () =>
           resolve({
@@ -42,8 +52,10 @@ export default class TestService extends BaseService<unknown, unknown> {
       );
     });
   }
-  nonexistent(input: IInputDelete): Promise<IOutput<unknown, unknown>> {
-    return new Promise<IOutput<unknown, unknown>>((resolve) => {
+  nonexistent(
+    input: IInputDelete
+  ): Promise<IOutput<unknown, unknown, unknown>> {
+    return new Promise<IOutput<unknown, unknown, unknown>>((resolve) => {
       resolve({
         receivedItem: 'nonexistent.receivedItem',
         result: 'nonexistent.result',
@@ -52,8 +64,8 @@ export default class TestService extends BaseService<unknown, unknown> {
       });
     });
   }
-  delete(input: IInputDelete): Promise<IOutput<unknown, unknown>> {
-    return new Promise<IOutput<unknown, unknown>>((resolve) => {
+  delete(input: IInputDelete): Promise<IOutput<unknown, unknown, unknown>> {
+    return new Promise<IOutput<unknown, unknown, unknown>>((resolve) => {
       resolve({
         receivedItem: 'delete.receivedItem',
         result: 'delete.result',
@@ -62,8 +74,8 @@ export default class TestService extends BaseService<unknown, unknown> {
       });
     });
   }
-  correct(input: IInputUpdate<any>): Promise<IOutput<unknown, unknown>> {
-    return new Promise<IOutput<unknown, unknown>>((resolve) => {
+  correct(input: IInputUpdate): Promise<IOutput<unknown, unknown, unknown>> {
+    return new Promise<IOutput<unknown, unknown, unknown>>((resolve) => {
       resolve({
         receivedItem: 'correct.receivedItem',
         result: 'correct.result',
@@ -72,8 +84,8 @@ export default class TestService extends BaseService<unknown, unknown> {
       });
     });
   }
-  update(input: IInputUpdate<any>): Promise<IOutput<unknown, unknown>> {
-    return new Promise<IOutput<unknown, unknown>>((resolve) => {
+  update(input: IInputUpdate): Promise<IOutput<unknown, unknown, unknown>> {
+    return new Promise<IOutput<unknown, unknown, unknown>>((resolve) => {
       resolve({
         receivedItem: 'update.receivedItem',
         result: 'update.result',
@@ -82,8 +94,8 @@ export default class TestService extends BaseService<unknown, unknown> {
       });
     });
   }
-  read(input: IInputRead): Promise<IOutput<unknown, unknown>> {
-    return new Promise<IOutput<unknown, unknown>>((resolve) => {
+  read(input: IInputRead): Promise<IOutput<unknown, unknown, unknown>> {
+    return new Promise<IOutput<unknown, unknown, unknown>>((resolve) => {
       resolve({
         receivedItem: 'read.receivedItem',
         result: 'read.result',
