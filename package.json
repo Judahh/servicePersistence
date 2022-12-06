@@ -1,6 +1,6 @@
 {
   "name": "@flexiblepersistence/service",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "A Service implementation for Flexible Persistence's PersistenceAdapter",
   "main": "dist/source/index.js",
   "keywords": [
@@ -29,7 +29,7 @@
     "url": "git+https://github.com/Judahh/flexiblePersistence.git"
   },
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Judahh/flexiblePersistence/issues"
   },
