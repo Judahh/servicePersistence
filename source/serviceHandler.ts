@@ -41,6 +41,14 @@ export class ServiceHandler implements IPersistence {
     if (element) this.setElement(element);
     if (persistence) this.setPersistence(persistence);
   }
+  async transaction(
+    // eslint-disable-next-line no-unused-vars
+    callback: (transaction: any) => Promise<any>,
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+    options: any
+  ): Promise<any> {
+    return await callback(undefined);
+  }
   clear(): Promise<boolean> {
     if (this.persistence) return this.persistence.clear();
     throw new Error('Persistence nonexistent.');
