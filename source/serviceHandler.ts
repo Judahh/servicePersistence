@@ -12,6 +12,7 @@ import {
   IInputRead,
   IInputDelete,
   IInput,
+  ITransaction,
 } from 'flexiblepersistence';
 import { IDefault } from '@flexiblepersistence/default-initializer';
 import { BaseService } from '.';
@@ -42,12 +43,21 @@ export class ServiceHandler implements IPersistence {
     if (persistence) this.setPersistence(persistence);
   }
   async transaction(
-    // eslint-disable-next-line no-unused-vars
-    callback: (transaction: any) => Promise<any>,
     // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-    options: any
+    options?: any,
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+    callback?: (transaction: ITransaction) => Promise<any>
   ): Promise<any> {
-    return await callback(undefined);
+    // It must get all CRUD methods with input and output then
+    // put intro an array and then call them in a transaction
+    // If one fails, all must be rolled back using the array
+    // from back to front
+    // each method must call it's opposite method in the transaction
+    // create - call delete using the output of create
+    // delete - call create using a read before delete
+    // update - call update using a read before update
+    // read - no action
+    throw new Error('Method not implemented.');
   }
   clear(): Promise<boolean> {
     if (this.persistence) return this.persistence.clear();
